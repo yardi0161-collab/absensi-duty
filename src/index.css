@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  @apply bg-[#0a0f08] text-[#d8e6cf] font-hud antialiased;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(125, 255, 60, 0.06), transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(230, 210, 74, 0.04), transparent 45%),
+    linear-gradient(180deg, #0a0f08 0%, #0d1409 100%);
+  overflow-x: hidden;
+}
+
+/* Grid overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(125, 255, 60, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 255, 60, 0.04) 1px, transparent 1px);
+  background-size: 42px 42px;
+  z-index: 0;
+  mask-image: radial-gradient(circle at center, black 30%, transparent 90%);
+}
+
+/* Comic panel helper */
+.comic-panel {
+  @apply relative border-2 border-neon/40 bg-gradient-to-br from-[#12200b]/90 to-[#0a1207]/95;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+}
+
+.comic-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(125, 255, 60, 0.025) 0px,
+    rgba(125, 255, 60, 0.025) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.6;
+}
+
+.hud-corner::before,
+.hud-corner::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #7dff3c;
+  opacity: 0.85;
+}
+.hud-corner::before {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+.hud-corner::after {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Neon text */
+.neon-text {
+  color: #7dff3c;
+  text-shadow: 0 0 8px rgba(125, 255, 60, 0.65);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0f08;
+}
+::-webkit-scrollbar-thumb {
+  background: #2d3a1f;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #7dff3c;
+}
+
+/* Safe area for bottom nav */
+.pb-safe {
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 84px);
+}
